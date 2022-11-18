@@ -6,6 +6,8 @@
 サービスを利用するユーザー
 - chat  
 メッセージのやり取りを行うチャット
+- memberIDs
+chatに所属するuserのid
 - message  
 送信済みで他のユーザーから閲覧可能なメッセージ
 - scheduled message  
