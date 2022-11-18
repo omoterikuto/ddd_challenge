@@ -6,34 +6,34 @@ import (
 )
 
 type scheduledMessage struct {
-	id        uint64
-	text      text
-	chatID    uint64
-	userID    uint64
-	sendTime  sendTime
-	createdAt time.Time
+	id                   uint64
+	text                 text
+	chatID               uint64
+	userID               uint64
+	scheduledSendingTime scheduledSendingTime
+	createdAt            time.Time
 }
 
-type sendTime time.Time
+type scheduledSendingTime time.Time
 
-func newSendTime(t time.Time) (sendTime, error) {
+func newScheduledSendingTime(t time.Time) (scheduledSendingTime, error) {
 	if t.Before(time.Now()) {
-		return sendTime(time.Now()), fmt.Errorf("sendTime must not be before now")
+		return scheduledSendingTime(time.Now()), fmt.Errorf("scheduledSendingTime must not be before now")
 	}
-	return sendTime(t), nil
+	return scheduledSendingTime(t), nil
 }
 
 type text string
 
 func newText(t string) (text, error) {
 	if t == "" {
-		return text(""), fmt.Errorf("text must not be empty")
+		return "", fmt.Errorf("text must not be empty")
 	}
 	return text(t), nil
 }
 
-func NewScheduledMessage(text string, chatID, userID uint64, sendTime time.Time) (*scheduledMessage, error) {
-	sendTimeVO, err := newSendTime(sendTime)
+func NewScheduledMessage(text string, chatID, userID uint64, scheduledSendingTime time.Time) (*scheduledMessage, error) {
+	scheduledSendingTimeVO, err := newScheduledSendingTime(scheduledSendingTime)
 	if err != nil {
 		return nil, err
 	}
@@ -44,16 +44,16 @@ func NewScheduledMessage(text string, chatID, userID uint64, sendTime time.Time)
 	}
 
 	return &scheduledMessage{
-		text:     textVO,
-		chatID:   chatID,
-		userID:   userID,
-		sendTime: sendTimeVO,
+		text:                 textVO,
+		chatID:               chatID,
+		userID:               userID,
+		scheduledSendingTime: scheduledSendingTimeVO,
 	}, nil
 }
 
-func (s scheduledMessage) EditSendTime(sendTime time.Time) error {
+func (s scheduledMessage) EditSendTime(scheduledSendingTime time.Time) error {
 	var err error
-	s.sendTime, err = newSendTime(sendTime)
+	s.scheduledSendingTime, err = newScheduledSendingTime(scheduledSendingTime)
 	if err != nil {
 		return err
 	}
