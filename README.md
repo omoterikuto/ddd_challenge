@@ -34,9 +34,9 @@ name      string
 memberIDs []uint64  
 
 **メソッド**  
-EditName(n string) error
-AppendMembers(userIDs []uint64)
-DeleteMembers(userIDs []uint64)
+EditName(n string) error  
+AppendMembers(userIDs []uint64)  
+DeleteMembers(userIDs []uint64)  
 
 ### message オブジェクト
 **プロパティ**  
