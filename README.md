@@ -19,7 +19,7 @@ chatに所属するuserのid
 
 
 # ドメインモデル図
-![ddd drawio](https://user-images.githubusercontent.com/52554440/202905880-ee0d8148-c2c5-4c25-87ce-583a1ba89853.png)
+![ddd drawio (1)](https://user-images.githubusercontent.com/52554440/202906727-26037f00-3c5b-4b57-a66c-c1dcc18a9bb6.png)
 [diagramsのリンク](https://drive.google.com/file/d/1RRtEIXxGXNl_dkC8ilsaZBkRqGEwHCfz/view?usp=sharing)
 
 # ドメインオブジェクトの型定義
