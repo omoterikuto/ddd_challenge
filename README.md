@@ -23,6 +23,7 @@ chatに所属するuserのid
 [diagramsのリンク](https://drive.google.com/file/d/1RRtEIXxGXNl_dkC8ilsaZBkRqGEwHCfz/view?usp=sharing)
 
 # ドメインオブジェクトの型定義
+※ メソッドに関して各フィールドのGetterは省略しています。
 ### user オブジェクト  
 **プロパティ**  
 id   uint64  
@@ -56,5 +57,5 @@ sendTime  sendTime
 createdAt time.Time 
 
 **メソッド**  
-EditSendTime(scheduledSendingTime time.Time) error  
-EditText(text string) error
+ChangeSendTime(scheduledSendingTime time.Time) error  
+ChangeText(text string) error
