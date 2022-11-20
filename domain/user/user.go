@@ -5,6 +5,14 @@ type user struct {
 	name string
 }
 
+func (u *user) ID() uint64 {
+	return u.id
+}
+
+func (u *user) Name() string {
+	return u.name
+}
+
 type Repository interface {
 	FindByID(chatID uint64) (*user, error)
 }

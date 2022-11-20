@@ -7,18 +7,6 @@ type chat struct {
 	memberIDs []uint64
 }
 
-func NewChat(name string, userIDs []uint64) (*chat, error) {
-	nameVO, err := newName(name)
-	if err != nil {
-		return nil, err
-	}
-
-	return &chat{
-		name:      nameVO,
-		memberIDs: userIDs,
-	}, nil
-}
-
 type name string
 
 func newName(n string) (name, error) {
@@ -28,13 +16,17 @@ func newName(n string) (name, error) {
 	return name(n), nil
 }
 
-func (c *chat) EditName(n string) error {
+func (c *chat) ChangeName(n string) error {
 	var err error
 	c.name, err = newName(n)
 	if err != nil {
 		return err
 	}
 	return nil
+}
+
+func (c *chat) Name() name {
+	return c.name
 }
 
 func (c *chat) AppendMembers(userIDs []uint64) {
@@ -53,6 +45,22 @@ func (c *chat) DeleteMembers(userIDs []uint64) {
 			newMemberIDs = append(newMemberIDs, mid)
 		}
 	}
+}
+
+func (c *chat) MemberIDs() []uint64 {
+	return c.memberIDs
+}
+
+func NewChat(name string, userIDs []uint64) (*chat, error) {
+	nameVO, err := newName(name)
+	if err != nil {
+		return nil, err
+	}
+
+	return &chat{
+		name:      nameVO,
+		memberIDs: userIDs,
+	}, nil
 }
 
 type Repository interface {

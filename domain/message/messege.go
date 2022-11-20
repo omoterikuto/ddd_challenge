@@ -13,6 +13,10 @@ type message struct {
 	createdAt time.Time
 }
 
+func (m *message) ID() uint64 {
+	return m.id
+}
+
 type text string
 
 func newText(t string) (text, error) {
@@ -22,13 +26,30 @@ func newText(t string) (text, error) {
 	return text(t), nil
 }
 
-func NewMessage(text string, chatID, userID uint64) (*message, error) {
+func (m *message) Text() text {
+	return m.text
+}
+
+func (m *message) ChatID() uint64 {
+	return m.chatID
+}
+
+func (m *message) UserID() uint64 {
+	return m.userID
+}
+
+func (m *message) CreatedAt() time.Time {
+	return m.createdAt
+}
+
+func NewMessage(id uint64, text string, chatID, userID uint64) (*message, error) {
 	textVO, err := newText(text)
 	if err != nil {
 		return nil, err
 	}
 
 	return &message{
+		id:     id,
 		text:   textVO,
 		chatID: chatID,
 		userID: userID,
