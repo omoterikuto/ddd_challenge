@@ -13,7 +13,7 @@ type scheduledMessage struct {
 	scheduledSendingTime scheduledSendingTime
 }
 
-func (s *scheduledMessage) ID() uint64 {
+func (s scheduledMessage) ID() uint64 {
 	return s.id
 }
 
@@ -26,7 +26,7 @@ func newText(t string) (text, error) {
 	return text(t), nil
 }
 
-func (s scheduledMessage) ChangeText(text string) error {
+func (s *scheduledMessage) ChangeText(text string) error {
 	var err error
 	s.text, err = newText(text)
 	if err != nil {
@@ -35,15 +35,15 @@ func (s scheduledMessage) ChangeText(text string) error {
 	return nil
 }
 
-func (s *scheduledMessage) Text() text {
+func (s scheduledMessage) Text() text {
 	return s.text
 }
 
-func (s *scheduledMessage) ChatID() uint64 {
+func (s scheduledMessage) ChatID() uint64 {
 	return s.chatID
 }
 
-func (s *scheduledMessage) UserID() uint64 {
+func (s scheduledMessage) UserID() uint64 {
 	return s.userID
 }
 
@@ -56,11 +56,11 @@ func newScheduledSendingTime(t time.Time) (scheduledSendingTime, error) {
 	return scheduledSendingTime(t), nil
 }
 
-func (s *scheduledMessage) ScheduledSendingTime() scheduledSendingTime {
+func (s scheduledMessage) ScheduledSendingTime() scheduledSendingTime {
 	return s.scheduledSendingTime
 }
 
-func (s scheduledMessage) ChangeScheduledSendingTime(scheduledSendingTime time.Time) error {
+func (s *scheduledMessage) ChangeScheduledSendingTime(scheduledSendingTime time.Time) error {
 	var err error
 	s.scheduledSendingTime, err = newScheduledSendingTime(scheduledSendingTime)
 	if err != nil {
